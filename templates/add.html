@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>添加新客户</h1>
+<form method="POST">
+    <div class="mb-3">
+        <label for="name" class="form-label">客户名称</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="city" class="form-label">所在城市</label>
+        <input type="text" class="form-control" id="city" name="city" required>
+    </div>
+    <div class="mb-3">
+        <label for="industry" class="form-label">所处行业</label>
+        <input type="text" class="form-control" id="industry" name="industry" required>
+    </div>
+    <div class="mb-3">
+        <label for="goods_type" class="form-label">货物类型</label>
+        <input type="text" class="form-control" id="goods_type" name="goods_type" required>
+    </div>
+    <button type="submit" class="btn btn-primary">添加客户</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">返回</a>
+</form>
+{% endblock %} 
