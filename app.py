@@ -80,6 +80,7 @@ def delete_customer(id):
         flash('客户删除成功！', 'success')
     except:
         flash('删除客户时出错，请重试。', 'danger')
+        
     
     return redirect(url_for('index'))
 
