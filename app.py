@@ -19,6 +19,7 @@ class Customer(db.Model):
     city = db.Column(db.String(100), nullable=False, index=True)
     industry = db.Column(db.String(100), nullable=False)
     goods_type = db.Column(db.String(100), nullable=False)
+    scale = db.Column(db.String(100), nullable=False, default='未设置')
 
     def __repr__(self):
         return f'<Customer {self.name}>'
@@ -27,7 +28,7 @@ class Customer(db.Model):
 def index():
     customers = Customer.query.with_entities(
         Customer.id, Customer.name, Customer.city, 
-        Customer.industry, Customer.goods_type
+        Customer.industry, Customer.goods_type, Customer.scale
     ).all()
     return render_template('index.html', customers=customers)
 
@@ -38,8 +39,15 @@ def add_customer():
         city = request.form['city']
         industry = request.form['industry']
         goods_type = request.form['goods_type']
+        scale = request.form['scale']
         
-        new_customer = Customer(name=name, city=city, industry=industry, goods_type=goods_type)
+        new_customer = Customer(
+            name=name, 
+            city=city, 
+            industry=industry, 
+            goods_type=goods_type,
+            scale=scale
+        )
         
         try:
             db.session.add(new_customer)
@@ -60,6 +68,7 @@ def edit_customer(id):
         customer.city = request.form['city']
         customer.industry = request.form['industry']
         customer.goods_type = request.form['goods_type']
+        customer.scale = request.form['scale']
         
         try:
             db.session.commit()
@@ -93,15 +102,16 @@ def get_customer_by_name(name):
             'name': customer.name,
             'city': customer.city,
             'industry': customer.industry,
-            'goods_type': customer.goods_type
+            'goods_type': customer.goods_type,
+            'scale': customer.scale
          })
          
     return jsonify({'error': 'Customer not found'}), 404
 
     
         
-if __name__ == "__main__":
+if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
-    # 生产环境配置：监听所有网络接口，使用8080端口
-    app.run(host="0.0.0.0", port=8080, debug=False)
+        db.drop_all()  # 删除所有表
+        db.create_all()  # 创建新表
+    app.run(host='0.0.0.0', port=8080, debug=False)

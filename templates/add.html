@@ -19,6 +19,15 @@
         <label for="goods_type" class="form-label">货物类型</label>
         <input type="text" class="form-control" id="goods_type" name="goods_type" required>
     </div>
+    <div class="mb-3">
+        <label for="scale" class="form-label">客户规模</label>
+        <select class="form-control" id="scale" name="scale" required>
+            <option value="大型">大型</option>
+            <option value="中型">中型</option>
+            <option value="小型">小型</option>
+            <option value="微型">微型</option>
+        </select>
+    </div>
     <button type="submit" class="btn btn-primary">添加客户</button>
     <a href="{{ url_for('index') }}" class="btn btn-secondary">返回</a>
 </form>

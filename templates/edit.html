@@ -19,6 +19,15 @@
         <label for="goods_type" class="form-label">货物类型</label>
         <input type="text" class="form-control" id="goods_type" name="goods_type" value="{{ customer.goods_type }}" required>
     </div>
+    <div class="mb-3">
+        <label for="scale" class="form-label">客户规模</label>
+        <select class="form-control" id="scale" name="scale" required>
+            <option value="大型" {% if customer.scale == '大型' %}selected{% endif %}>大型</option>
+            <option value="中型" {% if customer.scale == '中型' %}selected{% endif %}>中型</option>
+            <option value="小型" {% if customer.scale == '小型' %}selected{% endif %}>小型</option>
+            <option value="微型" {% if customer.scale == '微型' %}selected{% endif %}>微型</option>
+        </select>
+    </div>
     <button type="submit" class="btn btn-primary">保存修改</button>
     <a href="{{ url_for('index') }}" class="btn btn-secondary">返回</a>
 </form>
