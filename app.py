@@ -100,8 +100,8 @@ def get_customer_by_name(name):
 
     
         
-if __name__ == '__main__':
+if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(debug=True) 
-
+    # 生产环境配置：监听所有网络接口，使用8080端口
+    app.run(host="0.0.0.0", port=8080, debug=False)
