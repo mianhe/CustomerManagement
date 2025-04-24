@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, jso
 from flask_sqlalchemy import SQLAlchemy 
 import os
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///customers.db'
@@ -108,8 +109,7 @@ def get_customer_by_name(name):
          
     return jsonify({'error': 'Customer not found'}), 404
 
-    
-        
+
 if __name__ == '__main__':
     with app.app_context():
         db.drop_all()  # 删除所有表
